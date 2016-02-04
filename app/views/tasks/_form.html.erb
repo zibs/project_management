@@ -1,0 +1,17 @@
+<% if @task.errors.any? %>
+<ul>
+  <% @task.errors.full_messages.each do |error_msg| %>
+    <li style = "color: red"><%= error_msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for @task do |f| %>
+<div>
+<%= f.label :title %>
+<%= f.text_field :title %>
+</div>
+<div>
+  <%= submit_tag  %>
+</div>
+<% end %>

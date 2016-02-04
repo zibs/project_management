@@ -1,0 +1,9 @@
+<h1>all projects <%= @projects.length %></h1>
+
+<% if @projects %>
+<ul>
+<% @projects.each do |project| %>
+  <li><%= link_to project.title, project_path(project) %></li>
+<% end %>
+</ul>
+<% end %>

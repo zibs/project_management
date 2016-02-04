@@ -7,10 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= flash[:notice] || flash[:alert] %>
   <header>
     <nav>
       <%= link_to "Home", index_path %>
       <%= link_to "About", about_path %>
+      <%= link_to "All Projects", projects_path %>
+      <%= link_to "New Project", new_project_path %>
+      <%= link_to "All Tasks", tasks_path %>
+      <%= link_to "New Task", new_task_path %>
     </nav>
   </header>
 <%= yield %>
