@@ -12,9 +12,10 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
-      flash[:alert] = "Project added"
+      flash[:notice] = "Project added"
       redirect_to project_path(@project)
     else
+      flash[:alert] = "Project unsuccessfully added"
       render :new
     end
   end
@@ -27,15 +28,16 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to project_path((@project), { notice: "project updated" })
+      redirect_to(project_path(@project), {notice: "Project updated!!"})
     else
+      flash[:alert] = "Update was not successful"
       render :edit
     end
   end
 
   def destroy
     @project.destroy
-    redirect_to root_path, alert: "project removed!"
+    redirect_to((root_path), { alert: "project removed!" })
   end
 
       private

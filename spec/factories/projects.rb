@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :project do
-    title "MyString"
-description "MyText"
-due_date "2016-02-02 16:58:50"
+    sequence(:title){|n| "#{Faker::Hipster.words(4).join(" ")}-#{n}"}
+    sequence(:description){|n| "#{Faker::Hipster.sentences(1).join}-#{n}"}
+    due_date { 60.days.from_now }
   end
 
 end
