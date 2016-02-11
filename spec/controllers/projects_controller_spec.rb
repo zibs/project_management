@@ -120,7 +120,7 @@ RSpec.describe ProjectsController, :type => :controller do
     context "with invalid attributes" do
       before do
         patch :update, id: project, project: { title: "" }
-        end
+      end
 
         it "renders the edit template after bad input" do
           expect(response).to render_template(:edit)

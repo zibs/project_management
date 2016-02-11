@@ -1,8 +1,8 @@
 class Project < ActiveRecord::Base
+  has_many :tasks, dependent: :destroy
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true, length: { minimum: 5 }
   validate  :future_due_date
-  # add datetime validation
 
 
   private
