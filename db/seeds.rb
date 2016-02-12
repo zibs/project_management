@@ -7,13 +7,23 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 100.times do
-  project = Project.new(
+  p = Project.create(
             title: Faker::App.name,
             description: Faker::Hacker.say_something_smart,
             due_date: Faker::Date.forward(23)
             )
-  project.save
+    10.times do
+    p.tasks.create {title: Faker::Company.bs,
+                    due_date: Faker::Date.forward(5) }
+
+    p.discussion.create do
+        
+    end
+
+    end
 end
+  # project.save
+
 
 100.times do
   task = Task.new(
