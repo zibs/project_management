@@ -7,12 +7,17 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks, only: [:create, :destroy, :update]
-    # resources :disc, [:create]
+    resources :discussions, only: [:create, :edit, :destroy]
   end
 
-  resources :disc do
-    # comments
+  resources :discussions, only: [:show, :update, :edit] do
+    resources :comments, only: [:create, :edit, :destroy]
+  end
+  resources :comments, only: [:update, :edit]
+  resources :users, only: [:new, :create]
 
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

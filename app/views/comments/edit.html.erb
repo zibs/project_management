@@ -1,0 +1,20 @@
+<h1>Edit your comment...</h1>
+
+<!-- DISPLAY ERRORS -->
+<% if @comment.errors.any? %>
+<ul>
+  <% @comment.errors.full_messages.each do |error_msg| %>
+    <li style = "color: red"><%= error_msg %></li>
+  <% end %>
+</ul>
+<% end %>
+<!-- FORM FOR COMMENT -->
+<%= form_for [@discussion, @comment] do |f|  %>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

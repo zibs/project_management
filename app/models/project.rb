@@ -1,5 +1,9 @@
 class Project < ActiveRecord::Base
+  
   has_many :tasks, dependent: :destroy
+  has_many :discussions, dependent: :destroy
+  has_many :comments, through: :discussions
+
   validates :title, presence: true, uniqueness: true
   validates :description, presence: true, length: { minimum: 5 }
   validate  :future_due_date

@@ -1,3 +1,8 @@
 class Discussion < ActiveRecord::Base
-  validates :title, presence: true
+  belongs_to :project
+  has_many :comments, dependent: :destroy
+
+  validates :title, presence: :true, uniqueness: { scope: :project_id }
+  validates :body, presence: :true, uniqueness: { scope: :project_id }
+
 end
