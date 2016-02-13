@@ -13,8 +13,13 @@ Rails.application.routes.draw do
   resources :discussions, only: [:show, :update, :edit] do
     resources :comments, only: [:create, :edit, :destroy]
   end
+
   resources :comments, only: [:update, :edit]
-  resources :users, only: [:new, :create, :edit, :update]
+  resources :users, only: [:new, :create, :edit, :update] do
+
+  end
+  get "users/:id/update-password" => "users#edit_password", as: :edit_password
+  patch "users/:id/update-password" => "users#update_password", as: :update_password
 
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection

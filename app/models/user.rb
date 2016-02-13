@@ -8,10 +8,19 @@ class User < ActiveRecord::Base
   # attr_accessor :password_confirmation
   # add ^^ attributes for us.
 
-  validates :password, length: { minimum: 5 }, on: :create
+  validates :password, length: { minimum: 5 }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true,
             uniqueness: true,
             format: VALID_EMAIL_REGEX
+
+  # def authenticate_password(params)
+  #   self.authenticate(user_params[:current_password])) && (user_params[:password] == user_params[:password_confirmation])
+  # end
+  # def update_password(params)
+#
+  # end
+
+
 end
