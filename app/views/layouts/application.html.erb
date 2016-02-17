@@ -5,9 +5,16 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <%= flash[:notice] || flash[:alert] %>
+  <% if flash %>
+  <section class="alerts">
+    <% flash.each do | message_type, message| %>
+    <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+    <% end  %>
+  </section>
+  <% end %>
   <header>
     <nav>
       <%= link_to "Home", index_path %>
