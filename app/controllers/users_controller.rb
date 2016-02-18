@@ -34,9 +34,9 @@ class UsersController < ApplicationController
 
   def update_password
     if (@user.authenticate(user_params[:current_password])) && (user_params[:password] == user_params[:password_confirmation]) && @user.update(password: user_params[:password])
-      redirect_to root_path, notice: "UPDATED~!"
+      redirect_to root_path, notice: "Project Updated!"
     else
-      flash[:alert] = "Bad Data"
+      flash[:alert] = "Invalid Combination"
       render :edit_password
     end
   end

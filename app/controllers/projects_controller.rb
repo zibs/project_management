@@ -1,5 +1,8 @@
 class ProjectsController < ApplicationController
+
   before_action :find_project, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user, except: [:index, :show]
+  before_action :authorize_only, only: [:edit, :update, :destroy]
 
   def index
     @projects = Project.order("created_at DESC")
@@ -11,6 +14,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    @project.user = current_user
     if @project.save
       flash[:notice] = "Project added"
       redirect_to project_path(@project)
@@ -23,8 +27,6 @@ class ProjectsController < ApplicationController
   def show
     @task = Task.new
     @discussion = Discussion.new
-
-
     # @tasks = @project.tasks.order("created_at DESC")
     # display complete/incomplete tasks
     @tasks_done = @project.tasks.where(["done = ?", true]).order("created_at DESC")
@@ -48,6 +50,7 @@ class ProjectsController < ApplicationController
     @project.destroy
     redirect_to((root_path), { alert: "project removed!" })
   end
+
 
       private
 
