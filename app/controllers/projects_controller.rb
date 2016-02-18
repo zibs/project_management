@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user, except: [:index, :show]
-  before_action :authorize_only, only: [:edit, :update, :destroy]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def index
     @projects = Project.order("created_at DESC")
@@ -16,10 +16,10 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user = current_user
     if @project.save
-      flash[:notice] = "Project added"
+      flash[:success] = "Project added"
       redirect_to project_path(@project)
     else
-      flash[:alert] = "Project unsuccessfully added"
+      flash[:warning] = "Project unsuccessfully added"
       render :new
     end
   end
@@ -48,7 +48,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to((root_path), { alert: "project removed!" })
+    redirect_to((root_path), flash: { danger: "project removed!" })
   end
 
 
@@ -60,6 +60,12 @@ class ProjectsController < ApplicationController
 
         def find_project
           @project = Project.find(params[:id])
+        end
+
+        def authorize_user
+          unless can? :manage, @project
+          redirect_to root_path , flash: { info: "Access Denied" }
+          end
         end
 
 end
