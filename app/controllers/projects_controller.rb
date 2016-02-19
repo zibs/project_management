@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def index
-    @projects = Project.order("created_at DESC")
+    @projects = Project.order("created_at DESC").page(params[:page]).per(15)
   end
 
   def new
@@ -39,16 +39,16 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      redirect_to(project_path(@project), {notice: "Project updated!!"})
+      redirect_to(project_path(@project), flash: { success:  "Project Updated"})
     else
-      flash[:alert] = "Update was not successful"
+      flash[:warning] = "Update was not successful"
       render :edit
     end
   end
 
   def destroy
     @project.destroy
-    redirect_to((root_path), flash: { danger: "project removed!" })
+    redirect_to((root_path), flash: { danger: "Project Removed!" })
   end
 
 

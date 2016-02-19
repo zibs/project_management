@@ -1,42 +1,57 @@
-<h2>Discuss: <%= @discussion.title %></h2>
-<h6><%= @discussion.body %></h6>
-<p><%= link_to "Edit this discussion...", edit_discussion_path(@discussion) %></p>
-<%= link_to "Back to Project...", project_path(@discussion.project_id) %>
-
+<h2 class = "title text-lg-center">Discussion: <%= @discussion.title %></h2>
+<div class="row">
+  <div class="form-group-lg col-md-8 col-md-offset-2">
+    <p><%= @discussion.body %></p>
+    <%= link_to "Edit this discussion...", edit_discussion_path(@discussion) %></p>
+    <%= link_to "Back to Project...", project_path(@discussion.project_id) %>
+  </div>
+</div>
 <hr>
 
-<h4>Comments: </h4>
-<% if @comments %>
-<ul>
-  <% @comments.each do |comment| %>
-  <li style = "color: green">
-    <%= comment.body %>
-    <%= link_to "Edit", edit_discussion_comment_path(@discussion, comment) %>
-    <%= link_to "Delete", [@discussion, comment], method: :delete, data: {confirm: "Are you sure?"} %>
-  </li>
-  <% end %>
+
+<% if @comments.present? %>
+<h4 class = "title text-lg-center">Comments: </h4>
+<div class="row">
+  <div class="form-group-lg col-md-6 col-md-offset-3">
+  <ul>
+    <% @comments.each do |comment| %>
+    <li>
+      <%= comment.body %>
+      <%= link_to "Edit", edit_discussion_comment_path(@discussion, comment) %>
+      <%= link_to "Delete", [@discussion, comment], method: :delete, data: {confirm: "Are you sure?"} %>
+    </li>
+    <% end %>
+  </div>
+</div>
   </ul>
 <% end %>
 
-<hr>
-
 <!-- ADD A COMMENT -->
-<h3>Add a comment: </h3>
+<h3 class = "text-lg-center title">Add a comment: </h3>
 <!-- DISPLAY COMMENT ERRORS -->
 <% if @comment.errors.any? %>
-<ul>
-  <% @comment.errors.full_messages.each do |error_msg| %>
-    <li style = "color: red"><%= error_msg %></li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 alert alert-danger">
+    <p>The form contains <strong><%= pluralize(@comment.errors.count, "error") %></strong>.</p>
+  <ul>
+    <% @comment.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+    <% end %>
+  </ul>
+  </div>
+</div>
 <% end %>
 <!-- FORM FOR COMMENT -->
-<%= form_for [@discussion, @comment] do |f|  %>
-  <div>
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+<div class="row">
+  <div class="form-group-lg col-md-6 col-md-offset-3">
+    <%= form_for [@discussion, @comment] do |f|  %>
+      <div class = "form-group">
+        <%# f.label :body %>
+        <%= f.text_area :body, class: "form-control" %>
+      </div>
+      <div class = "form-group">
+        <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
   </div>
-  <div>
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

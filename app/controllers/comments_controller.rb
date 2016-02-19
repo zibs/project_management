@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.discussion = @discussion
 
     if @comment.save
-      redirect_to discussion_path(@discussion), notice: "Comment created"
+      redirect_to discussion_path(@discussion), flash: { success:  "Comment created" }
     else
       render "discussions/show"
     end
@@ -19,14 +19,14 @@ class CommentsController < ApplicationController
   def update
     @discussion = Comment.find(params[:id]).discussion_id
     if @comment.update(comment_params)
-      redirect_to discussion_path(@discussion), notice: "Comment updated..."
+      redirect_to discussion_path(@discussion), flash: { success: "Comment updated..."}
     end
   end
 
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
-    redirect_to discussion_path(params[:discussion_id]), alert: "Comment Deleted"
+    redirect_to discussion_path(params[:discussion_id]), flash: {danger: "Comment Deleted" } 
   end
 
     private

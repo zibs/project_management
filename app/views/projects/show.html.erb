@@ -1,68 +1,69 @@
-<h1><%= @project.title %></h1>
-
-<p> <%= @project.description %></p>
-<h4><%= @project.due_date %></h4>
-<p><%= link_to "EDIT", edit_project_path(@project) %></p>
-<p><%= link_to "DELETE", project_path(@project), method: :delete, data: { confirm: "Are you sure?"} %></p>
-
-<%# FAVOURITE A PROJECT! %>
-<% favourite = @project.favourite_for(current_user) %>
+<h1 class = "title text-lg-center"><%= @project.title %></h1>
+<div class="row">
+  <div class="form-group-lg col-md-6 col-md-offset-3">
+    <p> <%= @project.description %></p>
+    <h4><%= @project.due_date %></h4>
+    <p><%= link_to "EDIT", edit_project_path(@project) %></p>
+    <p><%= link_to "DELETE", project_path(@project), method: :delete, data: { confirm: "Are you sure?"} %></p>
+  <% favourite = @project.favourite_for(current_user) %>
     <% if favourite %>
     <%= link_to fa_icon("heart"), project_favourite_path(@project, favourite), method: :delete %>
     <% else %>
     <%= link_to fa_icon("heart-o"), project_favourites_path(@project), method: :post %>
-    <% end %>
-    <%= @project.favourites.count %>
+  <% end %>
+  <%= @project.favourites.count %>
+  </div>
+</div>
 
-  
-
+<%# FAVOURITE A PROJECT! %>
 
 <hr>
-
-<h2>Add a Task </h2>
+<div class="row">
+  <div class="form-group-lg col-md-6">
+    <h3>Add a Task </h3>
 <!-- error messages of task -->
-<% if @task && @task.errors.any? %>
-<ul>
-  <% @task.errors.full_messages.each do |error| %>
-  <li style = "color: red"><%= error %></li>
-  <% end %>
-</ul>
-<% end %>
+    <% if @task && @task.errors.any? %>
+    <ul>
+      <% @task.errors.full_messages.each do |error| %>
+      <li style = "color: red"><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
+    <!-- form for adding a task  -->
+    <%= form_for [@project, @task || Task.new] do |f| %>
+      <div class = "form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class = "form-group">
+        <%= f.label :due_date %>
+        <%= f.date_select :due_date, class: "form-control" %>
+      </div>
+      <div class = "form-group">
+        <%= f.submit "add task", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    </div>
+    <div class="col-md-6">
+      <% if @tasks_not_done %>
+      <h4 class = "title">INCOMPLETE TASKS:</h4>
+      <%= render "tasks", tasks: @tasks_not_done %>
+      <% end %>
+      <!-- LIST COMPLETED TASKS -->
+      <% if @tasks_done %>
+      <h4 class = "title">COMPLETED TASKS: </h4>
+      <%= render "tasks", tasks: @tasks_done %>
+      <% end %>
+    </div>
+</div>
 
-
-<!-- form for adding a task  -->
-<%= form_for [@project, @task || Task.new] do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  <div>
-    <%= f.label :due_date %>
-    <%= f.date_select :due_date %>
-  </div>
-  <div>
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<!-- LIST INCOMPLETE TASKS -->
-<% if @tasks_not_done %>
-<h2>INCOMPLETE TASKS:</h2>
-<%= render "tasks", tasks: @tasks_not_done %>
-<% end %>
-
-<!-- LIST COMPLETED TASKS -->
-<% if @tasks_done %>
-<h2>COMPLETED TASKS: </h2>
-<%= render "tasks", tasks: @tasks_done %>
-<% end %>
 
 
 
 <!-- LIST ALL DISCUSSIONS -->
-<% if @discussions %>
-<h2>ALL DISCUSSIONS: </h2>
-<ul>
+<% if @discussions.present? %>
+<h2 class = "lg">ALL DISCUSSIONS: </h2>
+  <ul>
   <% @discussions.each do |discussion| %>
   <li><%= link_to "#{discussion.title}", discussion_path(discussion) %>
       <%= link_to "Edit", edit_project_discussion_path(@project, discussion) %>
@@ -74,40 +75,49 @@
 <% end %>
 
 <!-- ADD A DISCUSSION -->
-<h2>Add a Discussion </h2>
+<h2 class = "text-lg-center title">Add a Discussion </h2>
 <!--ERROR MESSAGES FOR DISCUSSION -->
 <% if @discussion && @discussion.errors.any? %>
-<ul>
-  <% @discussion.errors.full_messages.each do |error| %>
-  <li style = "color: red"><%= error %></li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 alert alert-danger">
+    <p>The form contains <strong><%= pluralize(@discussion.errors.count, "error") %></strong>.</p>
+    <ul>
+      <% @discussion.errors.full_messages.each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 <% end %>
 <!-- FORM FOR DISCUSSION -->
-<%= form_for [@project, (@discussion || Discussion.new)] do |f| %>
-<div>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<div class="row">
+    <div class="form-group-lg col-md-6 col-md-offset-3">
+      <%= form_for [@project, (@discussion || Discussion.new)] do |f| %>
+      <div class = "form-group">
+        <% f.label :title %>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+      <div class = "form-group">
+        <% f.label :body %>
+        <%= f.text_area :body, class: "form-control" %>
+      </div>
+      <div class = "form-group">
+        <%= f.submit "add discussion", class: "btn btn-primary" %>
+      </div>
+      <% end %>
+  </div>
 </div>
-<div>
-  <%= f.label :body %>
-  <%= f.text_area :body %>
-</div>
-<div>
-  <%= f.submit %>
-</div>
-<% end %>
 
 <!-- DISPLAY ALL TASKS-->
- <% if @tasks %>
- <h4>All Tasks ... (<%= @tasks.length %>)</h4>
- <ul>
- <% @tasks.each do |task| %>
-   <li><%= task.title  %>
-       <%= render "done", task: task %>
-       <%= link_to "Delete", [@project, task], method: :delete,
+ <%# if @tasks %>
+ <!-- <h4>All Tasks ... (<%# @tasks.length %>)</h4> -->
+ <!-- <ul> -->
+ <%# @tasks.each do |task| %>
+   <!-- <li><%# task.title  %> -->
+       <%# render "done", task: task %>
+       <%# link_to "Delete", [@project, task], method: :delete,
            data: { confirm: "Are you sure?"} %>
-   </li>
-   <% end %>
- </ul>
- <% end %>
+   <!-- </li> -->
+   <%# end %>
+ <!-- </ul> -->
+ <%# end %>

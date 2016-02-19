@@ -7,7 +7,7 @@ class DiscussionsController < ApplicationController
     @discussion.project = @project
 
     if @discussion.save
-      redirect_to discussion_path(@discussion), notice: "Discussion Initialized"
+      redirect_to discussion_path(@discussion), flash: {success:  "Discussion Initialized"}
       # render json: params
     else
       render "projects/show"
@@ -24,7 +24,7 @@ class DiscussionsController < ApplicationController
 
   def update
     if @discussion.update(discussion_params)
-      redirect_to discussion_path(@discussion), notice: "Discussion updated..."
+      redirect_to discussion_path(@discussion), flash: {success:  "Discussion Updated"}
     end
     # render json: params
   end
@@ -32,7 +32,7 @@ class DiscussionsController < ApplicationController
   def destroy
     discussion = Discussion.find(params[:id])
     discussion.destroy
-    redirect_to project_path(params[:project_id]), alert: "Discussion Removed..."
+    redirect_to project_path(params[:project_id]), flash: {danger: "Discussion Removed..."}
   end
 
 

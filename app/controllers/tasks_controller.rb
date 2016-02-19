@@ -1,6 +1,5 @@
 class TasksController < ApplicationController
     before_action :find_task, only: [:show, :edit, :update, :destroy]
-
     # def index
     #   @tasks = Task.order("created_at DESC")
     # end
@@ -14,7 +13,7 @@ class TasksController < ApplicationController
       @task = Task.new(task_params)
       @task.project = @project
       if @task.save
-        redirect_to project_path(@project), notice: "Task Added"
+        redirect_to project_path(@project), flash: { sucess: "Task Added" }
       else
         render "projects/show"
       end
@@ -24,7 +23,6 @@ class TasksController < ApplicationController
       #   redirect_to task_path(@task)
       # else
       #   render :new
-
     end
     #
     # def show
@@ -35,8 +33,7 @@ class TasksController < ApplicationController
     #
     def update
       @task.update(task_params)
-      redirect_to project_path(params[:project_id]), notice: "Project Changed!"
-
+      redirect_to project_path(params[:project_id]), flash: { sucess: "Task Changed" }
     #   if @task.update(task_params)
     #     redirect_to task_path((@task), { notice: "task updated" })
     #   else
@@ -47,7 +44,7 @@ class TasksController < ApplicationController
     def destroy
         task = Task.find(params[:id])
         task.destroy
-        redirect_to project_path(params[:project_id]), alert: "task removed!"
+        redirect_to project_path(params[:project_id]), flash: { danger:  "task removed!" }
     end
 
           private

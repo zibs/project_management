@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get 'index' => "home#index"
   get 'about' => "home#about"
-  root "home#index"
+  root "projects#index"
 
   resources :projects do
     resources :tasks, only: [:create, :destroy, :update]

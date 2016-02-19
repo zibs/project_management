@@ -10,7 +10,10 @@ div.alert {
   border-radius: 8px;
   margin-bottom: 5px;
 }
+main.container {
+  // background-color: rgb(255, 171, 171);
 
+}
 i.tasks-fa  {
   color: white;
   float: left;
@@ -23,6 +26,9 @@ i.tasks-fa  {
 .navbar-light .navbar-nav .nav-link {
   color: black;
   font-size: 1.25em;
+}
+.title {
+  padding: 15px 35px;
 }
 
 // .alert-alert {

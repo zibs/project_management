@@ -1,9 +1,20 @@
-<h1>all projects <%= @projects.length %></h1>
+<h1 class = "text-lg-center title">All Projects (<%= @projects.length %>)</h1>
 
 <% if @projects %>
-<ul>
-<% @projects.each do |project| %>
-  <li><%= link_to project.title, project_path(project) %></li>
-<% end %>
-</ul>
+<div class="row">
+  <div class="form-group-lg col-md-6 col-md-offset-3">
+    <table class="table table-striped">
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= link_to project.title, project_path(project) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+<section class="row">
+  <div class="col-md-6 col-md-offset-3 text-lg-center">
+    <%= paginate @projects %>
+  </div>
+</section>
 <% end %>

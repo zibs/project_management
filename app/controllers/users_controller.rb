@@ -9,9 +9,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in(@user)
-      redirect_to root_path, notice: "User created"
+      redirect_to root_path, flash: { success:  "User created" }
     else
-      flash[:alert] = "User not created"
+      flash[:danger] = "User not created"
       render :new
     end
   end
@@ -21,9 +21,9 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to root_path, notice: "User updated"
+      redirect_to root_path, flash: { info:  "User Updated" }
     else
-      flash[:alert] = "nope"
+      flash[:danger] = "nope"
       render :edit
     end
   end
@@ -34,9 +34,9 @@ class UsersController < ApplicationController
 
   def update_password
     if (@user.authenticate(user_params[:current_password])) && (user_params[:password] == user_params[:password_confirmation]) && @user.update(password: user_params[:password])
-      redirect_to root_path, notice: "Project Updated!"
+      redirect_to root_path, flash: { success: "Project Updated!" }
     else
-      flash[:alert] = "Invalid Combination"
+      flash[:warning] = "Invalid Combination"
       render :edit_password
     end
   end
