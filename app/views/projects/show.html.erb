@@ -5,6 +5,18 @@
 <p><%= link_to "EDIT", edit_project_path(@project) %></p>
 <p><%= link_to "DELETE", project_path(@project), method: :delete, data: { confirm: "Are you sure?"} %></p>
 
+<%# FAVOURITE A PROJECT! %>
+<% favourite = @project.favourite_for(current_user) %>
+    <% if favourite %>
+    <%= link_to fa_icon("heart"), project_favourite_path(@project, favourite), method: :delete %>
+    <% else %>
+    <%= link_to fa_icon("heart-o"), project_favourites_path(@project), method: :post %>
+    <% end %>
+    <%= @project.favourites.count %>
+
+  
+
+
 <hr>
 
 <h2>Add a Task </h2>

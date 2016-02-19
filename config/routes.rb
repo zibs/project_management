@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :projects do
     resources :tasks, only: [:create, :destroy, :update]
     resources :discussions, only: [:create, :edit, :destroy]
+    resources :favourites, only: [:create, :destroy]
   end
+
+  resources :favourites, only: [:index]
 
   resources :discussions, only: [:show, :update, :edit] do
     resources :comments, only: [:create, :edit, :destroy]

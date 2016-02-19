@@ -8,33 +8,10 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <% if flash %>
-  <section class="alerts">
-    <% flash.each do | message_type, message| %>
-    <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
-    <% end  %>
-  </section>
-  <% end %>
-  <header>
-    <nav>
-      <%= link_to "Home", index_path %>
-      <%= link_to "About", about_path %>
-      <%= link_to "All Projects", projects_path %>
-      <%= link_to "New Project", new_project_path %>
-
-      <% if user_signed_in? %>
-        Hello <%= link_to "#{current_user.first_name}", edit_user_path(current_user) %>
-        <%= link_to "Sign out", sessions_path, method: :delete %>
-      <% else %>
-        <%= link_to "Sign Up", new_user_path %>
-        <%= link_to "Sign In", new_session_path %>
-      <% end %>
-      <%# link_to "All Tasks", tasks_path %>
-      <%# link_to "New Task", new_task_path %>
-    </nav>
-  </header>
-
+<%= render "layouts/navbar" %>
+<%= render "layouts/flash" %>
+<main class="container">
 <%= yield %>
-
+</main>
 </body>
 </html>

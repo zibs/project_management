@@ -1,3 +1,5 @@
+@import "bootstrap";
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
@@ -8,11 +10,26 @@ div.alert {
   border-radius: 8px;
   margin-bottom: 5px;
 }
-.alert-alert {
-  background-color: rgba(251, 128, 128, 0.68);
-  color: rgb(219, 4, 31);
+
+i.tasks-fa  {
+  color: white;
+  float: left;
 }
-.alert-notice {
-  background-color: rgba(105, 255, 103, 0.58);
-  color: rgb(31, 217, 0);
+.navbar-nav .nav-item  {
+  float: right;
+  padding-right: 10px;
+
 }
+.navbar-light .navbar-nav .nav-link {
+  color: black;
+  font-size: 1.25em;
+}
+
+// .alert-alert {
+//   background-color: rgba(251, 128, 128, 0.68);
+//   color: rgb(219, 4, 31);
+// }
+// .alert-notice {
+//   background-color: rgba(105, 255, 103, 0.58);
+//   color: rgb(31, 217, 0);
+// }

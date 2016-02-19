@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   validate :password_length
 
+  has_many :favourites, dependent: :destroy
+  has_many :favourite_projects, through: :favourites, source: :project
+
   VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   # temporarily store password in memory
   # attr_accessor :password
