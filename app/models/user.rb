@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :projects, dependent: :destroy
   has_many :discussions, dependent: :nullify
+  has_many :comments, dependent: :nullify
   validate :password_length
 
   has_many :favourites, dependent: :destroy

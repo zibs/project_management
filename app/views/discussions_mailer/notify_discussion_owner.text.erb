@@ -1,9 +1,10 @@
 Hello <%= @owner.full_name %>
 
-You've gotten an comment on your discussion: 
+You've gotten an comment on your discussion:
 
 Discussion is: <%= @discussion.title %>
-The comment is: <%= @comment.body %>
-
+The comment's from <%= @comment.user.full_name %> and is:
+   <%= @comment.body %>
+   
 projectfully yours,
 pm tool

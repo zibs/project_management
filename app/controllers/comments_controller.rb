@@ -1,13 +1,15 @@
 class CommentsController < ApplicationController
   before_action :find_comment, only: [:edit, :update]
+  before_action :authenticate_user
+
 
   def create
     @discussion = Discussion.find(params[:discussion_id])
     @comment = Comment.new(comment_params)
     @comment.discussion = @discussion
-
+    @comment.user = current_user
     if @comment.save
-      DiscussionsMailer.notify_discussion_owner(@comment).deliver_now
+      DiscussionsMailer.notify_discussion_owner(@comment).deliver_now unless @discussion.user == current_user
       redirect_to discussion_path(@discussion), flash: { success:  "Comment created" }
     else
       render "discussions/show"

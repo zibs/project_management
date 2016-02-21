@@ -3,7 +3,8 @@
 <p>You've gotten an comment on your discussion: </p>
 
 <p>Discussion is: <%= @discussion.title %></p>
-<p>The comment is: <%= @comment.body %></p>
+<p>The comment's from <%= @comment.user.full_name %> and is:
+   <%= @comment.body %></p>
 
 <p>projectfully yours,</p>
 <p><strong>pm tool</strong></p>
