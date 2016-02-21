@@ -1,9 +1,10 @@
 class TasksController < ApplicationController
     before_action :find_task, only: [:show, :edit, :update, :destroy]
+    before_action :authenticate_user
+
     # def index
     #   @tasks = Task.order("created_at DESC")
     # end
-    #
     # def new
     #   @task = Task.new
     # end
@@ -12,6 +13,7 @@ class TasksController < ApplicationController
       @project = Project.find(params[:project_id])
       @task = Task.new(task_params)
       @task.project = @project
+      @task.user = current_user
       if @task.save
         redirect_to project_path(@project), flash: { sucess: "Task Added" }
       else
@@ -33,6 +35,9 @@ class TasksController < ApplicationController
     #
     def update
       @task.update(task_params)
+      if @task.user != current_user && @task.done?
+        TasksMailer.notify_task_owner(@task, current_user).deliver_later
+      end
       redirect_to project_path(params[:project_id]), flash: { sucess: "Task Changed" }
     #   if @task.update(task_params)
     #     redirect_to task_path((@task), { notice: "task updated" })

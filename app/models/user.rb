@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   has_secure_password
+
   has_many :projects, dependent: :destroy
   has_many :discussions, dependent: :nullify
   has_many :comments, dependent: :nullify
-  validate :password_length
+  has_many :tasks, dependent: :nullify
+
 
   has_many :favourites, dependent: :destroy
   has_many :favourite_projects, through: :favourites, source: :project
@@ -14,6 +16,7 @@ class User < ActiveRecord::Base
   # attr_accessor :password_confirmation
   # add ^^ attributes for us.
 
+  validate :password_length
   validates :password, length: { minimum: 5 }, on: :create
   validates :first_name, presence: true
   validates :last_name, presence: true
