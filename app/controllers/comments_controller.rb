@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     @comment.discussion = @discussion
     @comment.user = current_user
     if @comment.save
-      DiscussionsMailer.notify_discussion_owner(@comment).deliver_now unless @discussion.user == current_user
+      DiscussionsMailer.notify_discussion_owner(@comment).deliver_later unless @discussion.user == current_user
       redirect_to discussion_path(@discussion), flash: { success:  "Comment created" }
     else
       render "discussions/show"
