@@ -1,0 +1,12 @@
+<p>Hi <%= @project_owner.first_name %></p>
+
+<p>Your project, <%= @project.title %> added <%= @discussions.length %> new discussions today</p>
+<p>Here are they are:
+  <% @discussions.each do |discussion| %>
+    <p><%= discussion.title %></p>
+    <p><%= discussion.body %> by <%= discussion.user.full_name %></p>
+  <% end %>
+
+<p>That's it today!</p>
+
+<p>See you tomorrow :)</p>

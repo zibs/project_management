@@ -7,4 +7,11 @@ class ProjectsMailer < ApplicationMailer
     mail(to: @project_owner.email, subject: "Today's New Tasks")
   end
 
+  def summarize_new_discussions(user, discussions)
+    @project_owner = user
+    @discussions = discussions
+    @project = discussions[0].project
+    mail(to: @project_owner.email, subject: "Today's New Discussions")
+  end
+
 end
