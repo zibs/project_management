@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
     @comment.discussion = @discussion
 
     if @comment.save
+      DiscussionsMailer.notify_discussion_owner(@comment).deliver_now
       redirect_to discussion_path(@discussion), flash: { success:  "Comment created" }
     else
       render "discussions/show"
@@ -26,7 +27,7 @@ class CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
-    redirect_to discussion_path(params[:discussion_id]), flash: {danger: "Comment Deleted" } 
+    redirect_to discussion_path(params[:discussion_id]), flash: {danger: "Comment Deleted" }
   end
 
     private

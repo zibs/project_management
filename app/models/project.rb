@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
   def favourite_for(user)
     favourites.find_by(user_id: user)
   end
-  
+
 
   private
 

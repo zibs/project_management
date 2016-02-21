@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
   has_many :projects, dependent: :destroy
+  has_many :discussions, dependent: :nullify
   validate :password_length
 
   has_many :favourites, dependent: :destroy
@@ -26,18 +27,22 @@ class User < ActiveRecord::Base
 #
   # end
 
+  def full_name
+    "#{first_name} #{last_name}".titleize.strip
+  end
+
   private
 
-  def password_length
-    if password.present?
-      true unless password.length <= 6
-    elsif !password.present?
-      true
-    else
-      errors.add(:password, "must be longer than 6 characters")
-      # false
-      # use false if doing a before_update callback
+    def password_length
+      if password.present?
+        true unless password.length <= 6
+      elsif !password.present?
+        true
+      else
+        errors.add(:password, "must be longer than 6 characters")
+        # false
+        # use false if doing a before_update callback
+      end
     end
-  end
 
 end

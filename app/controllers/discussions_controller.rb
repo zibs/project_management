@@ -1,14 +1,14 @@
 class DiscussionsController < ApplicationController
   before_action :find_discussion, only: [:show, :update, :edit, :destroy]
+  before_action :authenticate_user, except: [:show, :index]
 
   def create
     @project = Project.find(params[:project_id])
     @discussion = Discussion.new(discussion_params)
     @discussion.project = @project
-
+    @discussion.user = current_user
     if @discussion.save
       redirect_to discussion_path(@discussion), flash: {success:  "Discussion Initialized"}
-      # render json: params
     else
       render "projects/show"
     end
