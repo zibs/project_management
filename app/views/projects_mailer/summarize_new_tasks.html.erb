@@ -1,0 +1,12 @@
+<p>Hi <%= @project_owner.first_name %></p>
+
+<p>Your project, <%= @project.title %> received <%= @tasks.length %> today</p>
+<p>Here are they are:
+  <% @tasks.each do |task| %>
+    <p><%= task.title %></p>
+    <p><%= task.body %> by <%= task.user.full_name %></p>
+  <% end %>
+
+<p>That's it today!</p>
+
+<p>See you tomorrow :)</p>

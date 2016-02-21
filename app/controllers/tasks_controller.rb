@@ -38,7 +38,7 @@ class TasksController < ApplicationController
       if @task.user != current_user && @task.done?
         TasksMailer.notify_task_owner(@task, current_user).deliver_later
       end
-      redirect_to project_path(params[:project_id]), flash: { sucess: "Task Changed" }
+      redirect_to project_path(params[:project_id]), flash: { success: "Task Changed" }
     #   if @task.update(task_params)
     #     redirect_to task_path((@task), { notice: "task updated" })
     #   else
