@@ -5,7 +5,8 @@
     <h4><%= @project.due_date %></h4>
     <p><%= link_to "EDIT", edit_project_path(@project) %></p>
     <p><%= link_to "DELETE", project_path(@project), method: :delete, data: { confirm: "Are you sure?"} %></p>
-<%# unless @project.user_id == current_user  %>
+<% if @project.user != current_user  %>
+
   <% favourite = @project.favourite_for(current_user) %>
     <% if favourite %>
     <%= link_to fa_icon("heart"), project_favourite_path(@project, favourite), method: :delete %>
@@ -15,6 +16,7 @@
   <%= @project.favourites.count %>
   </div>
 </div>
+<% end  %>
 
 <%# FAVOURITE A PROJECT! %>
 
