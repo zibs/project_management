@@ -1,14 +1,11 @@
-<nav class="navbar navbar-full navbar-light" style = "background-color: rgba(226, 111, 187, 0.87)">
+<nav class="navbar navbar-full navbar-light" style = "background-color: #E71D36">
   <div class="container">
 
   <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2"> &#9776; </button>
   <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar2">
       <ul class="nav navbar-nav">
-        <%= link_to fa_icon("tasks", class: "tasks-fa fa-5x"), root_path %>
+        <%= link_to fa_icon("briefcase", class: "tasks-fa fa-3x"), root_path %>
         <% if user_signed_in? %>
-        <li class="nav-item active logo">
-          <%# link_to "$ tail -f #{current_user.full_name_downcase}/misc.log", root_path, class: "nav-link brand-homepage" %>
-        </li>
         <li class="nav-item <%= 'active' if current_page?(new_project_path) %> ">
           <%= link_to "add project", new_project_path, class: "nav-link" %>
         </li>

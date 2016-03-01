@@ -20,10 +20,7 @@ RSpec.describe ProjectsController, :type => :controller do
           expect(assigns(:project)).to be_a_new(Project)
         end
       end
-
-
-
-
+      
       describe "#create" do
         context "with valid parameters" do
           let(:project_attributes){attributes_for(:project)}
