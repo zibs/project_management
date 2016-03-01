@@ -1,0 +1,11 @@
+<%  if @task.done? %>
+  $("#<%= dom_id(@task) %>").fadeOut(500, function() {
+    $(this).remove();
+    $("#complete_tasks").prepend("<%= j render 'tasks/task', task: @task %>")
+  });
+<% else %>
+  $("#<%= dom_id(@task) %>").fadeOut(500, function() {
+    $(this).remove();
+    $("#incomplete_tasks").prepend("<%= j render 'tasks/task', task: @task %>")
+  });
+<% end %>

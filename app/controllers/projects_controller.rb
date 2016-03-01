@@ -29,9 +29,10 @@ class ProjectsController < ApplicationController
     @discussion = Discussion.new
     # @tasks = @project.tasks.order("created_at DESC")
     # display complete/incomplete tasks
-    @tasks_done = @project.tasks.where(["done = ?", true]).order("created_at DESC")
-    @tasks_not_done = @project.tasks.where(["done = ?", false]).order("created_at DESC")
-    @discussions = @project.discussions.order("created_at DESC")
+    @tasks = @project.tasks
+    # @tasks_done = @project.tasks.where(["done = ?", true]).order("created_at DESC")
+    # @tasks_not_done = @project.tasks.where(["done = ?", false]).order("created_at DESC")
+    # @discussions = @project.discussions.order("created_at DESC")
   end
 
   def edit

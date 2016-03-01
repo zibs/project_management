@@ -1,0 +1,27 @@
+<% if @tasks %>
+<div id = "task_loop">
+  <div class="done">
+    <h4 class = "title">COMPLETE TASKS:</h4>
+    <section id="complete_tasks">
+      <% @tasks.where(done: true).each do |task| %>
+        <%= render "tasks/task", task: task %>
+        <% end %>
+      </section>
+  </div>
+
+  <div class="undone">
+    <h4 class = "title">INCOMPLETE TASKS:</h4>
+      <% @tasks.where(done: false).each do |task| %>
+      <section id="incomplete_tasks">
+        <%= render "tasks/task", task: task  %>
+        <% end %>
+      </section>
+  </div>
+  <%# @tasks.each do |task| %>
+    <%# else %>
+    <!-- <div class="notdone"> -->
+    <!-- </div> -->
+    <%# end %>
+  <%# end %>
+</div>
+<% end %>

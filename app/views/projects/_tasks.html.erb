@@ -1,8 +1,0 @@
-<ul>
-<% tasks.each do |task| %>
-  <li> <%= task.title %>
-    <%= render "done", task: task %>
-    <%= link_to "Delete", [@project, task], method: :delete,
-        data: { confirm: "Are you sure?"} %></li>
-  <% end %>
-</ul>

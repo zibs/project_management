@@ -1,17 +1,21 @@
-<% if @task.errors.any? %>
-<ul>
-  <% @task.errors.full_messages.each do |error_msg| %>
-    <li style = "color: red"><%= error_msg %></li>
+<% if @task && @task.errors.any? %>
+  <ul>
+    <% @task.errors.full_messages.each do |error| %>
+    <li style = "color: red"><%= error %></li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
-
-<%= form_for @task do |f| %>
-<div>
-<%= f.label :title %>
-<%= f.text_field :title %>
-</div>
-<div>
-  <%= submit_tag  %>
-</div>
-<% end %>
+  <!-- form for adding a task  -->
+  <%= form_for [@project, @task || Task.new], remote: true do |f| %>
+    <div class = "form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+    <div class = "form-group">
+      <%= f.label :due_date %>
+      <%= f.date_select :due_date, class: "form-control" %>
+    </div>
+    <div class = "form-group">
+      <%= f.submit "add task", class: "btn btn-primary" %>
+    </div>
+  <% end %>

@@ -14,10 +14,14 @@ class TasksController < ApplicationController
       @task = Task.new(task_params)
       @task.project = @project
       @task.user = current_user
-      if @task.save
-        redirect_to project_path(@project), flash: { sucess: "Task Added" }
-      else
-        render "projects/show"
+      respond_to do |format|
+        if @task.save
+          format.html { redirect_to project_path(@project), flash: { sucess: "Task Added" } }
+          format.js { render :successful_task }
+        else
+          format.html { render "projects/show" }
+          format.js { render :unsuccessful_task }
+        end
       end
       # @task = Task.new(task_params)
       # if @task.save
@@ -34,11 +38,15 @@ class TasksController < ApplicationController
     # end
     #
     def update
+      @project = @task.project
       @task.update(task_params)
-      if @task.user != current_user && @task.done?
+        if @task.user != current_user && @task.done?
         TasksMailer.notify_task_owner(@task, current_user).deliver_later
+        end
+      respond_to do |format|
+        format.html { redirect_to project_path(params[:project_id]), flash: { success: "Task Changed" } }
+        format.js { render :successfully_update_task}
       end
-      redirect_to project_path(params[:project_id]), flash: { success: "Task Changed" }
     #   if @task.update(task_params)
     #     redirect_to task_path((@task), { notice: "task updated" })
     #   else
@@ -47,9 +55,13 @@ class TasksController < ApplicationController
     end
 
     def destroy
-        task = Task.find(params[:id])
-        task.destroy
-        redirect_to project_path(params[:project_id]), flash: { danger:  "task removed!" }
+      task = Task.find(params[:id])
+      @project = task.project
+      task.destroy
+      respond_to do |format|
+        format.html { redirect_to project_path(params[:project_id]), flash: { danger:  "task removed!" } }
+        format.js { render }
+      end
     end
 
           private
