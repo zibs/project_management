@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :find_comment, only: [:edit, :update]
+  before_action :find_comment, only: [:edit, :update, :destroy]
   before_action :authenticate_user
 
 
@@ -32,9 +32,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = Comment.find(params[:id])
-    comment.destroy
-    redirect_to discussion_path(params[:discussion_id]), flash: {danger: "Comment Deleted" }
+    @discussion = @comment.discussion
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to discussion_path(params[:discussion_id]), flash: {danger: "Comment Deleted" } }
+      format.js { render }
+    end
   end
 
     private
