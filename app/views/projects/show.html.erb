@@ -5,18 +5,17 @@
       <h4><%= @project.due_date %></h4>
       <p><%= link_to "EDIT", edit_project_path(@project) %></p>
       <p><%= link_to "DELETE", project_path(@project), method: :delete, data: { confirm: "Are you sure?"} %></p>
-<% if @project.user != current_user  %>
-  <% favourite = @project.favourite_for(current_user) %>
-    <% if favourite %>
-    <%= link_to fa_icon("heart"), project_favourite_path(@project, favourite), method: :delete %>
-    <% else %>
-    <%= link_to fa_icon("heart-o"), project_favourites_path(@project), method: :post %>
-  <% end %>
-  <%= @project.favourites.count %>
+      <% if @project.user != current_user  %>
+        <% favourite = @project.favourite_for(current_user) %>
+          <% if favourite %>
+          <%= link_to fa_icon("heart"), project_favourite_path(@project, favourite), method: :delete %>
+          <% else %>
+          <%= link_to fa_icon("heart-o"), project_favourites_path(@project), method: :post %>
+        <% end %>
+        <%= @project.favourites.count %>
+      <% end  %>
+    </div>
   </div>
-</div>
-<% end  %>
-
 <hr>
 <div class="row">
   <div class="form-group-lg col-md-6">
@@ -27,9 +26,6 @@
     <%= render "tasks/tasks" %>
   </div>
 </div>
-
-
-
 
 
 <!-- LIST ALL DISCUSSIONS -->

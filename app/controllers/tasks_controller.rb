@@ -34,25 +34,36 @@ class TasksController < ApplicationController
     # def show
     # end
     #
-    # def edit
-    # end
+    def edit
+      respond_to do |format|
+        format.js { render :edit_task_form }
+      end
+    end
     #
     def update
       @project = @task.project
-      @task.update(task_params)
-        if @task.user != current_user && @task.done?
-        TasksMailer.notify_task_owner(@task, current_user).deliver_later
-        end
       respond_to do |format|
-        format.html { redirect_to project_path(params[:project_id]), flash: { success: "Task Changed" } }
-        format.js { render :successfully_update_task}
+        if @task.update(task_params)
+          if task_params[:title].present?
+            format.js { render :edit_task_success}
+          else
+            format.html { redirect_to project_path(params[:project_id]), flash: { success: "Task Changed" } }
+            format.js { render :successfully_update_task }
+          end
+          if @task.user != current_user && @task.done?
+          TasksMailer.notify_task_owner(@task, current_user).deliver_later
+          end
+        else
+          format.js { render :edit_task_unsuccessful}
+        end
       end
+    end
+
     #   if @task.update(task_params)
     #     redirect_to task_path((@task), { notice: "task updated" })
     #   else
     #     render :edit
     #   end
-    end
 
     def destroy
       task = Task.find(params[:id])

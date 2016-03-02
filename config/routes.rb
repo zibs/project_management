@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :discussions, only: [:create, :edit, :destroy]
     resources :favourites, only: [:create, :destroy]
   end
+  resources :tasks, only: [:edit, :update]
 
   resources :favourites, only: [:index]
 
