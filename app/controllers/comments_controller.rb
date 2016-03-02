@@ -22,12 +22,22 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    @discussion = @comment.discussion
+    respond_to do |format|
+      format.js { render :edit_comment}
+    end
   end
 
   def update
-    @discussion = Comment.find(params[:id]).discussion_id
-    if @comment.update(comment_params)
-      redirect_to discussion_path(@discussion), flash: { success: "Comment updated..."}
+    # @discussion = Comment.find(params[:id])
+    @discussion = @comment.discussion
+    respond_to do |format|
+      if @comment.update(comment_params)
+        format.html { redirect_to discussion_path(@discussion), flash: { success: "Comment updated..."}}
+        format.js { render :update_comment_success }
+      else
+        format.js { render :update_comment_failure }
+      end
     end
   end
 
