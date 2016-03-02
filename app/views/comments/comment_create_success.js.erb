@@ -1,0 +1,4 @@
+$("#comments_looper").prepend("<%= j render 'comments/comment', comment: @comment %>")
+<% @comment = Comment.new %>
+$("#comments-form").html("<%= j render 'form' %>")
+$("#comment_body").val("");

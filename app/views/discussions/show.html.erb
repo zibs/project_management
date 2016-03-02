@@ -13,45 +13,18 @@
 <h4 class = "title text-lg-center">Comments: </h4>
 <div class="row">
   <div class="form-group-lg col-md-6 col-md-offset-3">
-  <ul>
-    <% @comments.each do |comment| %>
-    <li>
-      <%= comment.body %>
-      <%= link_to "Edit", edit_discussion_comment_path(@discussion, comment) %>
-      <%= link_to "Delete", [@discussion, comment], method: :delete, data: {confirm: "Are you sure?"} %>
-    </li>
-    <% end %>
+    <ul id = "comments_looper">
+      <% @comments.each do |comment| %>
+        <%= render "comments/comment", comment: comment %>
+      <% end %>
+    </ul>
   </div>
 </div>
-  </ul>
 <% end %>
 
 <!-- ADD A COMMENT -->
 <h3 class = "text-lg-center title">Add a comment: </h3>
-<!-- DISPLAY COMMENT ERRORS -->
-<% if @comment.errors.any? %>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3 alert alert-danger">
-    <p>The form contains <strong><%= pluralize(@comment.errors.count, "error") %></strong>.</p>
-  <ul>
-    <% @comment.errors.full_messages.each do |error| %>
-      <li><%= error %></li>
-    <% end %>
-  </ul>
-  </div>
-</div>
-<% end %>
-<!-- FORM FOR COMMENT -->
-<div class="row">
-  <div class="form-group-lg col-md-6 col-md-offset-3">
-    <%= form_for [@discussion, @comment] do |f|  %>
-      <div class = "form-group">
-        <%# f.label :body %>
-        <%= f.text_area :body, class: "form-control" %>
-      </div>
-      <div class = "form-group">
-        <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
-      </div>
-    <% end %>
-  </div>
+
+<div id="comments-form">
+  <%= render "comments/form" %>
 </div>

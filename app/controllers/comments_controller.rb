@@ -8,11 +8,16 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.discussion = @discussion
     @comment.user = current_user
-    if @comment.save
-      DiscussionsMailer.notify_discussion_owner(@comment).deliver_later unless @discussion.user == current_user
-      redirect_to discussion_path(@discussion), flash: { success:  "Comment created" }
-    else
-      render "discussions/show"
+    respond_to do |format|
+      if @comment.save
+        DiscussionsMailer.notify_discussion_owner(@comment).deliver_later unless @discussion.user == current_user
+        format.html { redirect_to discussion_path(@discussion), flash: { success:  "Comment created" } }
+        format.js { render :comment_create_success }
+      else
+
+        format.html { render "discussions/show" }
+        format.js { render :comment_create_failure}
+      end
     end
   end
 
