@@ -1,1 +1,3 @@
 $("#incomplete_tasks").prepend("<%= j render 'tasks/task', task: @task %>")
+<% @task = Task.new %>
+$("#<%= dom_id(@task) %>").html("<%= j render 'form' %>")

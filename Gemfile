@@ -35,6 +35,9 @@ gem "delayed_job_active_record"
 gem "delayed_job_web"
 gem "letter_opener"
 
+gem "capybara"
+gem "launchy"
+gem 'simplecov', :require => false
 # Use Unicorn as the app server
 # gem 'unicorn'
 

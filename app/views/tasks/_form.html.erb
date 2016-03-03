@@ -1,10 +1,14 @@
-<div id="<%= dom_id(@task) %>">
+
+<div id = "<%= dom_id(@task) %>">
 <% if @task && @task.errors.any? %>
-  <ul>
-    <% @task.errors.full_messages.each do |error| %>
-    <li style = "color: red"><%= error %></li>
-    <% end %>
-  </ul>
+  <div class="alert alert-danger">
+      <p>The form contains <strong><%= pluralize(@task.errors.count, "error") %></strong>.</p>
+    <ul>
+      <% @task.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
   <% end %>
   <!-- form for adding a task  -->
   <%= form_for [@project, @task || Task.new], remote: true do |f| %>
