@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :discussions, only: [:create, :edit, :destroy]
     resources :favourites, only: [:create, :destroy]
   end
-  resources :tasks, only: [:edit, :update]
+  resources :tasks, only: [:edit, :update]  do
+   post :sort, on: :collection
+  end
 
   resources :favourites, only: [:index]
 

@@ -1,6 +1,6 @@
 <% if @tasks %>
-<div id = "task_loop">
-  <div class="done">
+<div id = "task_loop" >
+  <div class="done" >
     <h4 class = "title">COMPLETE TASKS:</h4>
     <section id="complete_tasks">
       <% @tasks.where(done: true).each do |task| %>
