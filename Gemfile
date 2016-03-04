@@ -40,6 +40,13 @@ gem "launchy"
 gem 'simplecov', :require => false
 
 gem 'friendly_id', '~> 5.1.0'
+gem 'figaro'
+
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick'
+gem 'fog'
+
+gem 'quiet_assets'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
