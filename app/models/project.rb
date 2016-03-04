@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
   belongs_to :user
   has_many :tasks, dependent: :destroy
   has_many :discussions, dependent: :destroy

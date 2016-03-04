@@ -3,6 +3,7 @@ $(document).ready(function() {
     connectWith: "#incomplete_tasks",
     update: function() {
       var ids =$(this).sortable('serialize');
+      // console.log(ids);
       $.post("/tasks/sort", ids);
     }
   });

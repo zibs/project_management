@@ -43,7 +43,7 @@ i.tasks-fa  {
 }
 
 .project-list {
-  background-color: #EFFFE9;
+  // background-color: #EFFFE9;
   border-radius: 10px;
   // font-family: 'Libre Baskerville', serif;
 }
@@ -54,22 +54,22 @@ i.tasks-fa  {
   border-radius: 10px;
   padding: 10px 0;
     .inner-projects {
-      background-color: #011627;
+      // background-color: #011627;
       border-radius: 10px;
       padding: 15px;
     }
     .table-striped tbody tr:nth-of-type(odd) {
-      background-color: #a3a1a1;
+      // background-color: #a3a1a1;
       border-radius: 10px;
       > * > * {
-        color: rgb(0, 0, 0);
+        // color: rgb(0, 0, 0);
       }
     }
     .table-striped tbody tr:nth-of-type(even) {
-      background-color: #8b8687;
+      // background-color: #8b8687;
       border-radius: 10px;
       > * > *{
-        color: rgb(255, 255, 255);
+        // color: rgb(255, 255, 255);
       }
     }
 }
@@ -82,7 +82,7 @@ td > a {
   // border-top: 1px solid $darkerbrown;
 }
  .pagination-footer {
-   background-color: #2EC4B6;
+   background-color: ggo;
    margin-top: 10px;
    border-radius: 10px;
    > * {
@@ -100,11 +100,3 @@ color: rgb(226, 226, 226);}
 color: rgb(226, 226, 226);}
 .first > * {
 color: rgb(226, 226, 226);}
-// .alert-alert {
-//   background-color: rgba(251, 128, 128, 0.68);
-//   color: rgb(219, 4, 31);
-// }
-// .alert-notice {
-//   background-color: rgba(105, 255, 103, 0.58);
-//   color: rgb(31, 217, 0);
-// }

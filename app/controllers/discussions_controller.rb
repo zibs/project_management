@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
   before_action :authenticate_user, except: [:show, :index]
 
   def create
-    @project = Project.find(params[:project_id])
+    @project = Project.friendly.find(params[:project_id])
     @discussion = Discussion.new(discussion_params)
     @discussion.project = @project
     @discussion.user = current_user
@@ -31,8 +31,9 @@ class DiscussionsController < ApplicationController
 
   def destroy
     discussion = Discussion.find(params[:id])
+    project = discussion.project
     discussion.destroy
-    redirect_to project_path(params[:project_id]), flash: {danger: "Discussion Removed..."}
+    redirect_to project_path(project), flash: {danger: "Discussion Removed..."}
   end
 
 

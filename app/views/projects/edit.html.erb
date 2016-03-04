@@ -1,15 +1,2 @@
 <h1>EDIT A PROJECT</h1>
-
-<%= form_for [@project, (@discussion || Discussion.new)] do |f| %>
-<div>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-</div>
-<div>
-  <%= f.label :body %>
-  <%= f.text_area :body %>
-</div>
-<div>
-  <%= f.submit %>
-</div>
-<% end %>
+<%= render "form" %>

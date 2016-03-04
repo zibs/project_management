@@ -38,6 +38,8 @@ gem "letter_opener"
 gem "capybara"
 gem "launchy"
 gem 'simplecov', :require => false
+
+gem 'friendly_id', '~> 5.1.0'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

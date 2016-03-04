@@ -10,7 +10,7 @@ class TasksController < ApplicationController
     # end
 
     def create
-      @project = Project.find(params[:project_id])
+      @project = Project.friendly.find(params[:project_id])
       @task = Task.new(task_params)
       @task.project = @project
       @task.user = current_user
@@ -47,7 +47,7 @@ class TasksController < ApplicationController
           if task_params[:title].present?
             format.js { render :edit_task_success}
           else
-            format.html { redirect_to project_path(params[:project_id]), flash: { success: "Task Changed" } }
+            format.html { redirect_to project_path(@project), flash: { success: "Task Changed" } }
             format.js { render :successfully_update_task }
           end
           if @task.user != current_user && @task.done?
@@ -70,7 +70,7 @@ class TasksController < ApplicationController
       @project = task.project
       task.destroy
       respond_to do |format|
-        format.html { redirect_to project_path(params[:project_id]), flash: { danger:  "task removed!" } }
+        format.html { redirect_to project_path(@project), flash: { danger:  "task removed!" } }
         format.js { render }
       end
     end

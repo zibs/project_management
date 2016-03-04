@@ -32,13 +32,14 @@ class ProjectsController < ApplicationController
     @tasks = @project.tasks.order(:position)
     # @tasks_done = @project.tasks.where(["done = ?", true]).order("created_at DESC")
     # @tasks_not_done = @project.tasks.where(["done = ?", false]).order("created_at DESC")
-    # @discussions = @project.discussions.order("created_at DESC")
+    @discussions = @project.discussions.order("created_at DESC")
   end
 
   def edit
   end
 
   def update
+    @project.slug = nil
     if @project.update(project_params)
       redirect_to(project_path(@project), flash: { success:  "Project Updated"})
     else
@@ -60,7 +61,7 @@ class ProjectsController < ApplicationController
         end
 
         def find_project
-          @project = Project.find(params[:id])
+          @project = Project.friendly.find(params[:id])
         end
 
         def authorize_user
