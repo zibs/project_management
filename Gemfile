@@ -47,6 +47,8 @@ gem 'mini_magick'
 gem 'fog'
 
 gem 'quiet_assets'
+
+gem "active_model_serializers"
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -56,6 +58,7 @@ gem 'quiet_assets'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # gem "pry-rails"
   gem "faker"
   gem 'pry'
   gem 'rspec-rails', '~> 3.4.2'

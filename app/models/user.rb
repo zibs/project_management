@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_secure_password
+  before_create :generate_api_key
 
   has_many :projects, dependent: :destroy
   has_many :discussions, dependent: :nullify
@@ -46,6 +47,13 @@ class User < ActiveRecord::Base
         errors.add(:password, "must be longer than 6 characters")
         # false
         # use false if doing a before_update callback
+      end
+    end
+
+    def generate_api_key
+      self.api_key = SecureRandom.hex(32)
+      while User.exists?(api_key: self.api_key)
+        self.api_key = SecureRandom.hex(32)
       end
     end
 

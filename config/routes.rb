@@ -29,6 +29,19 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection
   end
+
+  namespace :api, defaults: {format: :json } do
+    namespace :v1 do
+      resources :projects, only: [:index, :show, :create] do
+        resources :tasks, only: [:create]
+      end
+      resources :discussions, only: [:show]
+    end
+  end
+
+
+
+
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
