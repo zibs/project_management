@@ -41,6 +41,9 @@ Rails.application.routes.draw do
   get "/auth/twitter", as: :sign_in_with_twitter
   get "/auth/twitter/callback" => "callbacks#twitter"
 
+  get "/auth/github", as: :sign_in_with_github
+  get "/auth/github/callback" => "callbacks#github"
+
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.

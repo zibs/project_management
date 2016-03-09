@@ -55,6 +55,20 @@ class User < ActiveRecord::Base
                 twitter_raw_data: twitter_data )
   end
 
+  def self.find_github_user(omniauth_data)
+    where(provider: "github", uid: omniauth_data["uid"]).first
+  end
+
+  def self.create_from_github(github_data)
+    name = github_data["info"]["name"].split(" ")
+    User.create(provider: "github",
+                uid: github_data["uid"],
+                first_name: name[0], last_name: name[1],
+                password: SecureRandom.hex,
+                github_token: github_data["credentials"]["token"],
+                github_extra_data: github_data["extra"]["raw_info"])
+  end
+
   private
 
     def password_length
