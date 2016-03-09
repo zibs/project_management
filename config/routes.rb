@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   get 'index' => "home#index"
   get 'about' => "home#about"
   root "projects#index"
@@ -39,8 +38,8 @@ Rails.application.routes.draw do
     end
   end
 
-
-
+  get "/auth/twitter", as: :sign_in_with_twitter
+  get "/auth/twitter/callback" => "callbacks#twitter"
 
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
