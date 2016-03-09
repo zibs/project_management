@@ -316,6 +316,7 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-test (0.6.3)
@@ -467,6 +468,7 @@ DEPENDENCIES
   pry
   puma
   quiet_assets
+  rack-cors
   rails (= 4.2.5.1)
   rails_12factor
   rspec-rails (~> 3.4.2)

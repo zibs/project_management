@@ -39,6 +39,8 @@ gem "capybara"
 gem "launchy"
 gem 'simplecov', :require => false
 
+gem 'rack-cors', :require => 'rack/cors'
+
 gem 'friendly_id', '~> 5.1.0'
 gem 'figaro'
 

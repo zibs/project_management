@@ -1,0 +1,9 @@
+.fetch-projects > a {
+  font-size: 1.75em;
+}
+.project-wrap {
+  border: 2px solid rgba(64, 223, 99, 0.84);
+  border-radius: 12px;
+  padding: 15px;
+  margin: 25px 15px;
+}
