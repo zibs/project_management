@@ -20,7 +20,7 @@ RSpec.describe ProjectsController, :type => :controller do
           expect(assigns(:project)).to be_a_new(Project)
         end
       end
-      
+
       describe "#create" do
         context "with valid parameters" do
           let(:project_attributes){attributes_for(:project)}
@@ -150,45 +150,7 @@ RSpec.describe ProjectsController, :type => :controller do
       end
     end
 
-    describe "#destroy" do
-
-      context "unauthorized user" do
-        let!(:user_two){create(:user)}
-        let!(:project){create(:project, user_id: user_two)}
-
-        it "cannot delete another user's project" do
-          delete :destroy, id: project
-          expect(response).to redirect_to(root_path)
-        end
-        it "sets a flash message" do
-          delete :destroy, id: project
-          expect(flash[:info]).to be
-        end
-      end
-      context "authorized user" do
-      let!(:firstproject){create(:project, user_id: user.id)}
-      let!(:project){create(:project, user_id: user.id)}
-
-      def delete_project
-        delete :destroy, id: project
-       end
-
-       it "removes the record from the database" do
-         expect{delete_project}.to change{Project.count}.by(-1)
-       end
-
-       it "redirects to the index template" do
-         delete_project
-         expect(response).to redirect_to(root_path)
-       end
-
-       it "sets a flash message upon deletion" do
-         delete_project
-         expect(flash[:danger]).to be
-       end
-     end
-
-    end
+  dat
 
   end
 

@@ -5,7 +5,7 @@ class ProjectSerializer < ActiveModel::Serializer
 
 
   def project_leader
-    User.find(self.object.user_id).full_name
+    User.find(object.user_id).full_name
     # binding.pry
     # User.find(user_id).full_name if user_id
   end
