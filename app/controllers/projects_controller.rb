@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   before_action :authorize_user, only: [:edit, :update, :destroy]
 
   def index
-    @projects = Project.order("created_at DESC").page(params[:page]).per(9)
+    @projects = Project.order("created_at DESC").page(params[:page]).per(7)
   end
 
   def new

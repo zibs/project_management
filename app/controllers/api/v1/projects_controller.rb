@@ -1,7 +1,7 @@
 class Api::V1::ProjectsController < Api::BaseController
 
   def index
-    @projects = Project.order("created_at DESC").limit(1)
+    @projects = Project.order("created_at DESC").limit(2)
     render json: @projects
   end
 

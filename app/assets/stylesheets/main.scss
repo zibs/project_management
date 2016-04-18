@@ -18,7 +18,10 @@ div.alert {
   border-radius: 8px;
   margin-bottom: 5px;
 }
-main.container {
+main.container-fluid {
+  background-image: image-url("work.png");
+  background-repeat: no-repeat;
+    background-size: 100% 100%;
   // background-color: rgb(255, 171, 171);
 
 }
@@ -39,6 +42,7 @@ i.tasks-fa  {
   float: left;
 }
 .title {
+  color: rgb(255, 255, 255);
   padding: 15px 35px;
 }
 
@@ -75,7 +79,8 @@ i.tasks-fa  {
 }
 
 td > a {
-  color: black;
+  color: rgb(255, 255, 255);
+  font-size: 1.5em;
 }
 
 .table th, .table td {
