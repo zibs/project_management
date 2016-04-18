@@ -23,5 +23,4 @@ Quiet Assets
 CanCanCan
 
 
-![Screenshot
-](https://raw.github.com/zibs/project_management/master/app/assets/images/readme.png)
+![Screenshot](https://raw.github.com/zibs/project_management/master/app/assets/images/readme.png)
