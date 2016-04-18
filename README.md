@@ -22,4 +22,4 @@ Kaminari
 Quiet Assets
 CanCanCan
 
-![Screenshot](https://raw.github.com/zibs/project_management/master/app/assets/images/readme1.png)
+![Screenshot](https://raw.github.com/zibs/project_management/master/app/assets/images/work.png)
