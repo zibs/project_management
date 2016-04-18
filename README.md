@@ -24,4 +24,4 @@ CanCanCan
 
 
 ![Screenshot
-](https://raw.github.com/zibs/awesome_answers/master/app/assets/images/readme.png)
+](https://raw.github.com/zibs/project_management/master/app/assets/images/readme.png)
